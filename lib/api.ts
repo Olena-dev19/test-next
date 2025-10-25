@@ -7,18 +7,31 @@ interface ApiResponse {
 }
 
 axios.defaults.baseURL = "https://next-docs-9f0504b0a741.herokuapp.com/";
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-export async function getNotes() {
-  await delay(2000);
-  const res = await axios.get<ApiResponse>("/notes");
+
+export async function getNotes(categoryId?: string, title?: string) {
+  const res = await axios.get<ApiResponse>("/notes", {
+    params: {
+      categoryId,
+      title,
+    },
+  });
   return res.data;
 }
 
 export const getSingleNote = async (noteId: string) => {
-  const { data } = await axios.get<Note>(`/notes/${noteId}`);
-  return data;
+  const res = await axios.get<Note>(`/notes/${noteId}`);
+  console.log(res.data);
+  return res.data;
 };
-// export const getNotes = async () => {
-//   const res = await axios.get<NoteListResponse>("/notes");
-//   return res.data;
-// };
+interface CategoryType {
+  id: string;
+  name: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export const getCategories = async () => {
+  const res = await axios<CategoryType[]>("/categories");
+  return res.data;
+};

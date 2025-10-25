@@ -7,7 +7,7 @@ type ItemsProps = {
 const NoteList = ({ notes }: ItemsProps) => {
   return (
     <ul>
-      {notes.map((note) => (
+      {notes?.map((note) => (
         <NoteItem key={note.id} item={note} />
       ))}
     </ul>

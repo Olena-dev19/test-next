@@ -1,3 +1,4 @@
+import { ALL_NOTES } from "@/lib/constantas";
 import css from "./Header.module.css";
 import Link from "next/link";
 
@@ -13,7 +14,7 @@ const Header = () => {
             <Link href="/">Home</Link>
           </li>
           <li>
-            <Link href="/notes">Notes</Link>
+            <Link href={`/notes/filter/${ALL_NOTES}`}>Notes</Link>
           </li>
           <li>
             <Link href="/profile">Profile</Link>
